@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[NAMA PERUSAHAAN] | Profile Perusahaan Neo-Brutalism</title>
+    
+    <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neo-yellow': '#FFE600',
+                        'neo-pink': '#FF007A',
+                        'neo-cyan': '#00F0FF',
+                        'neo-green': '#00FF66',
+                        'neo-purple': '#A855F7',
+                        'neo-orange': '#FF6B00',
+                        'neo-bg': '#FFFDF5',
+                        'neo-black': '#121212',
+                    },
+                    fontFamily: {
+                        display: ['Space Grotesk', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'brutal-sm': '3px 3px 0px #121212',
+                        'brutal': '5px 5px 0px #121212',
+                        'brutal-lg': '8px 8px 0px #121212',
+                        'brutal-xl': '12px 12px 0px #121212',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Neo-Brutalism Base Overrides & Micro-interactions */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFFDF5;
+            color: #121212;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .brutal-border {
+            border: 3.5px solid #121212;
+        }
+
+        .brutal-border-sm {
+            border: 2px solid #121212;
+        }
+
+        /* Hover Offset Shift Effect */
+        .neo-btn {
+            transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+        }
+        .neo-btn:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 9px 9px 0px #121212;
+        }
+        .neo-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #121212;
+        }
+
+        .neo-card {
+            transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .neo-card:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 11px 11px 0px #121212;
+        }
+
+        /* Ticker Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 18s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFE600;
+            border-left: 3px solid #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF007A;
+            border: 3px solid #121212;
+        }
+
+        /* Pattern Grids */
+        .bg-grid-pattern {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(18, 18, 18, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(18, 18, 18, 0.08) 1px, transparent 1px);
+        }
+
+        .bg-dots-pattern {
+            background-image: radial-gradient(#121212 15%, transparent 16%);
+            background-size: 16px 16px;
+        }
+    </style>
+</head>
+<body class="bg-neo-bg bg-grid-pattern min-h-screen text-neo-black antialiased selection:bg-neo-pink selection:text-white">
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-neo-green brutal-border shadow-brutal p-4 rounded-none flex items-center gap-3">
+            <i class="fa-solid fa-circle-check text-2xl text-neo-black"></i>
+            <div>
+                <h5 class="font-heading font-extrabold text-sm uppercase">Berhasil Diproses!</h5>
+                <p id="toast-message" class="text-xs font-semibold">Pesan Anda telah terkirim.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-neo-bg brutal-border-b border-b-4 bg-opacity-95 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-11 h-11 bg-neo-yellow brutal-border shadow-brutal-sm flex items-center justify-center font-heading font-extrabold text-xl group-hover:rotate-6 transition-transform">
+                        [L]
+                    </div>
+                    <span class="font-heading text-xl sm:text-2xl font-black tracking-tight uppercase bg-neo-cyan px-2 py-1 brutal-border-sm shadow-brutal-sm">
+                        [NAMA PERUSAHAAN]
+                    </span>
+                </a>
+
+                <!-- Desktop Menu Nav -->
+                <nav class="hidden md:flex items-center gap-6 font-heading font-bold text-sm uppercase tracking-wider">
+                    <a href="#about" class="px-2 py-1 hover:bg-neo-yellow brutal-border-sm border-transparent hover:border-neo-black transition-all shadow-none hover:shadow-brutal-sm">Tentang</a>
+                    <a href="#services" class="px-2 py-1 hover:bg-neo-cyan brutal-border-sm border-transparent hover:border-neo-black transition-all shadow-none hover:shadow-brutal-sm">Layanan</a>
+                    <a href="#advantages" class="px-2 py-1 hover:bg-neo-green brutal-border-sm border-transparent hover:border-neo-black transition-all shadow-none hover:shadow-brutal-sm">Keunggulan</a>
+                    <a href="#portfolio" class="px-2 py-1 hover:bg-neo-purple hover:text-white brutal-border-sm border-transparent hover:border-neo-black transition-all shadow-none hover:shadow-brutal-sm">Portofolio</a>
+                    <a href="#contact" class="neo-btn bg-neo-pink text-white px-5 py-2.5 brutal-border shadow-brutal font-black hover:text-neo-black">
+                        Hubungi Kami <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </a>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2.5 bg-neo-yellow brutal-border shadow-brutal text-neo-black font-extrabold" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-neo-cyan brutal-border-b p-6 space-y-4">
+            <a href="#about" class="mobile-nav-link block bg-white p-3 brutal-border shadow-brutal-sm font-heading font-bold uppercase">Tentang Kami</a>
+            <a href="#services" class="mobile-nav-link block bg-white p-3 brutal-border shadow-brutal-sm font-heading font-bold uppercase">Layanan Utama</a>
+            <a href="#advantages" class="mobile-nav-link block bg-white p-3 brutal-border shadow-brutal-sm font-heading font-bold uppercase">Keunggulan</a>
+            <a href="#portfolio" class="mobile-nav-link block bg-white p-3 brutal-border shadow-brutal-sm font-heading font-bold uppercase">Portofolio</a>
+            <a href="#contact" class="mobile-nav-link block bg-neo-pink text-white p-3 brutal-border shadow-brutal-sm font-heading font-bold uppercase text-center">
+                Hubungi Kami Now!
+            </a>
+        </div>
+    </header>
+
+    <!-- MARQUEE TICKER BANNER -->
+    <div class="bg-neo-yellow brutal-border-b py-2.5 overflow-hidden font-heading font-black text-sm uppercase tracking-widest select-none">
+        <div class="animate-marquee whitespace-nowrap flex gap-8">
+            <span>⚡ INOVASI DITANPA BATAS</span> <span>★</span>
+            <span>🚀 SOLUSI BISNIS MASA DEPAN</span> <span>★</span>
+            <span>💥 Uhuyy</span> <span>★</span>
+            <span>🔥 TERPERCAYA & PROFESIONAL</span> <span>★</span>
+            <span>⚡ INOVASI DITANPA BATAS</span> <span>★</span>
+            <span>🚀 SOLUSI BISNIS MASA DEPAN</span> <span>★</span>
+            <span>💥 Uhuyy</span> <span>★</span>
+            <span>🔥 TERPERCAYA & PROFESIONAL</span> <span>★</span>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="relative py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Hero Left Content -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Badge Tag -->
+                <div class="inline-flex items-center gap-2 bg-neo-green px-3.5 py-1.5 brutal-border shadow-brutal-sm">
+                    <span class="w-3 h-3 bg-neo-pink rounded-full animate-ping"></span>
+                    <span class="font-heading font-extrabold text-xs sm:text-sm uppercase tracking-wider">[BADGE STATUS / MOTTO UTAMA]</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none uppercase">
+                    Membangun <span class="bg-neo-cyan px-2 inline-block brutal-border shadow-brutal rotate-[-1deg]">[MASA DEPAN]</span> Solusi Bisnis Anda!
+                </h1>
+
+                <!-- Subtitle / Placeholder -->
+                <p class="text-lg sm:text-xl font-medium text-neo-black bg-white p-4 brutal-border shadow-brutal-sm leading-relaxed">
+                    [DESKRIPSI SINGKAT HERO SECTION PERUSAHAAN: Tuliskan pesan utama atau value proposition singkat mengenai bagaimana bisnis Anda memberikan solusi terbaik bagi para klien].
+                </p>
+
+                <!-- CTA Action Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#contact" class="neo-btn bg-neo-yellow text-neo-black px-8 py-4 brutal-border shadow-brutal font-heading font-black text-lg uppercase tracking-wider">
+                        [TOMBOL CTA UTAMA] <i class="fa-solid fa-arrow-right-long ml-2"></i>
+                    </a>
+                    <a href="#services" class="neo-btn bg-white text-neo-black px-8 py-4 brutal-border shadow-brutal font-heading font-extrabold text-lg uppercase tracking-wider">
+                        [LIHAT LAYANAN]
+                    </a>
+                </div>
+
+                <!-- Stats Badges Bar -->
+                <div class="grid grid-cols-3 gap-3 pt-6">
+                    <div class="bg-neo-purple/20 p-3 brutal-border text-center">
+                        <div class="font-heading font-black text-2xl sm:text-3xl text-neo-black">[99%]</div>
+                        <div class="text-xs font-bold uppercase mt-1">[METRIK 1]</div>
+                    </div>
+                    <div class="bg-neo-pink/20 p-3 brutal-border text-center">
+                        <div class="font-heading font-black text-2xl sm:text-3xl text-neo-black">[500+]</div>
+                        <div class="text-xs font-bold uppercase mt-1">[METRIK 2]</div>
+                    </div>
+                    <div class="bg-neo-cyan/20 p-3 brutal-border text-center">
+                        <div class="font-heading font-black text-2xl sm:text-3xl text-neo-black">[10+]</div>
+                        <div class="text-xs font-bold uppercase mt-1">[METRIK 3]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right Interactive Illustration Graphic -->
+            <div class="lg:col-span-5">
+                <div class="relative max-w-md mx-auto lg:max-w-none">
+                    <!-- Background Accent Layer -->
+                    <div class="absolute -top-4 -left-4 w-full h-full bg-neo-pink brutal-border"></div>
+                    
+                    <!-- Main Card Wrapper -->
+                    <div class="relative bg-white brutal-border shadow-brutal-xl p-6 sm:p-8 space-y-6">
+                        <div class="flex justify-between items-center brutal-border-b pb-4 bg-neo-yellow -mx-6 -mt-6 p-4">
+                            <div class="flex gap-2">
+                                <span class="w-4 h-4 rounded-full bg-red-500 brutal-border-sm"></span>
+                                <span class="w-4 h-4 rounded-full bg-yellow-400 brutal-border-sm"></span>
+                                <span class="w-4 h-4 rounded-full bg-green-400 brutal-border-sm"></span>
+                            </div>
+                            <span class="font-heading font-black text-xs uppercase bg-white px-2 py-0.5 brutal-border-sm">SYSTEM_STATUS: ACTIVE</span>
+                        </div>
+
+                        <!-- Card Content Placeholder Image Block -->
+                        <div class="relative bg-neo-cyan h-64 sm:h-72 brutal-border flex flex-col items-center justify-center p-6 text-center group overflow-hidden">
+                            <div class="absolute inset-0 bg-dots-pattern opacity-30"></div>
+                            <i class="fa-solid fa-rocket text-6xl sm:text-7xl mb-4 group-hover:scale-125 transition-transform duration-300"></i>
+                            <h3 class="font-heading font-black text-2xl uppercase bg-white px-3 py-1 brutal-border shadow-brutal-sm relative z-10">
+                                [VISUAL BRANDING]
+                            </h3>
+                            <p class="text-xs font-bold mt-2 bg-neo-yellow px-2 py-0.5 brutal-border-sm relative z-10 uppercase">
+                                [SLOGAN PERUSAHAAN]
+                            </p>
+                        </div>
+
+                        <!-- Interactive Quick Feature Selector -->
+                        <div class="space-y-3">
+                            <h4 class="font-heading font-extrabold text-sm uppercase">Pilih Fokus Bisnis Anda:</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="setFocus('[PENGEMBANGAN BISNIS]')" class="p-2 bg-neo-bg brutal-border-sm font-bold text-xs hover:bg-neo-green text-left transition-colors">
+                                    ⚡ [BISNIS STRATEGI]
+                                </button>
+                                <button onclick="setFocus('[INOVASI DIGITAL]')" class="p-2 bg-neo-bg brutal-border-sm font-bold text-xs hover:bg-neo-yellow text-left transition-colors">
+                                    🚀 [DIGITALISASI]
+                                </button>
+                            </div>
+                            <div id="focus-output" class="text-xs font-mono bg-neo-black text-neo-green p-2 brutal-border">
+                                > Selected: [PILIH FOKUS UNTUK TESTING]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 bg-white brutal-border-y">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header Tag -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+                <span class="bg-neo-purple text-white px-4 py-1.5 brutal-border shadow-brutal-sm font-heading font-black text-sm uppercase">
+                    01 // ABOUT US
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">
+                    TENTANG <span class="bg-neo-yellow px-2 brutal-border">[NAMA PERUSAHAAN]</span>
+                </h2>
+                <p class="text-base sm:text-lg font-medium text-gray-700">
+                    [SUB-JUDUL TENTANG KAMI: Penjelasan ringkas berdiri dan fokus perusahaan Anda].
+                </p>
+            </div>
+
+            <!-- About Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Story Box -->
+                <div class="neo-card bg-neo-bg p-6 brutal-border shadow-brutal space-y-4 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-neo-pink brutal-border flex items-center justify-center text-white text-2xl font-black mb-4">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="font-heading font-extrabold text-xl uppercase">[PROFIL & SEJARAH]</h3>
+                        <p class="text-sm font-medium leading-relaxed text-gray-800 mt-2">
+                            [Tuliskan sejarah, latar belakang, atau landasan pendirian perusahaan Anda secara singkat dan jelas di bagian ini].
+                        </p>
+                    </div>
+                    <span class="inline-block bg-neo-cyan font-heading font-bold text-xs px-3 py-1 brutal-border-sm w-max">
+                        EST. [TAHUN BERDIRI]
+                    </span>
+                </div>
+
+                <!-- Vision Box -->
+                <div class="neo-card bg-neo-bg p-6 brutal-border shadow-brutal space-y-4 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-neo-yellow brutal-border flex items-center justify-center text-neo-black text-2xl font-black mb-4">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 class="font-heading font-extrabold text-xl uppercase">[VISI PERUSAHAAN]</h3>
+                        <p class="text-sm font-medium leading-relaxed text-gray-800 mt-2">
+                            [Tuliskan poin Visi utama perusahaan Anda. Menjadi mitra terdepan dan terpercaya dalam memberikan dampak positif nyata].
+                        </p>
+                    </div>
+                    <span class="inline-block bg-neo-green font-heading font-bold text-xs px-3 py-1 brutal-border-sm w-max">
+                        OUR VISION
+                    </span>
+                </div>
+
+                <!-- Mission Box -->
+                <div class="neo-card bg-neo-bg p-6 brutal-border shadow-brutal space-y-4 flex flex-col justify-between md:col-span-2 lg:col-span-1">
+                    <div>
+                        <div class="w-12 h-12 bg-neo-cyan brutal-border flex items-center justify-center text-neo-black text-2xl font-black mb-4">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="font-heading font-extrabold text-xl uppercase">[MISI PERUSAHAAN]</h3>
+                        <ul class="text-sm font-medium space-y-2 text-gray-800 mt-2">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-square-check text-neo-pink mt-1"></i>
+                                <span>[POIN MISI 1: Menghadirkan kualitas standar tinggi]</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-square-check text-neo-pink mt-1"></i>
+                                <span>[POIN MISI 2: Mengutamakan kepuasan klien]</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-square-check text-neo-pink mt-1"></i>
+                                <span>[POIN MISI 3: Terus melakukan inovasi produk]</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <span class="inline-block bg-neo-pink text-white font-heading font-bold text-xs px-3 py-1 brutal-border-sm w-max">
+                        OUR MISSION
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div class="space-y-3">
+                <span class="bg-neo-green px-4 py-1.5 brutal-border shadow-brutal-sm font-heading font-black text-sm uppercase">
+                    02 // OUR SERVICES
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">
+                    LAYANAN <span class="bg-neo-pink text-white px-2 brutal-border">[UNGGULAN]</span>
+                </h2>
+            </div>
+            <p class="max-w-md font-medium text-sm sm:text-base bg-white p-3 brutal-border shadow-brutal-sm">
+                [DESKRIPSI RINGKAS PERKEMBANGAN LAYANAN KAMI UNTUK MEMENUHI KEBUTUHAN SPESIFIK INDUSTRI ANDA].
+            </p>
+        </div>
+
+        <!-- Services Cards Grid (4 Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Service 1 -->
+            <div class="neo-card bg-white p-6 brutal-border shadow-brutal flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="w-14 h-14 bg-neo-yellow brutal-border flex items-center justify-center text-3xl">
+                        💻
+                    </div>
+                    <h3 class="font-heading font-extrabold text-2xl uppercase">[LAYANAN 1]</h3>
+                    <p class="text-xs sm:text-sm font-medium text-gray-700 leading-relaxed">
+                        [Deskripsi detail mengenai Layanan 1. Penjelasan keunggulan teknis serta hasil akhir yang didapatkan oleh calon klien].
+                    </p>
+                </div>
+                <div class="pt-4 brutal-border-t">
+                    <a href="#contact" class="inline-flex items-center gap-2 font-heading font-extrabold text-xs uppercase hover:underline">
+                        Konsultasi Layanan <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="neo-card bg-white p-6 brutal-border shadow-brutal flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="w-14 h-14 bg-neo-cyan brutal-border flex items-center justify-center text-3xl">
+                        📊
+                    </div>
+                    <h3 class="font-heading font-extrabold text-2xl uppercase">[LAYANAN 2]</h3>
+                    <p class="text-xs sm:text-sm font-medium text-gray-700 leading-relaxed">
+                        [Deskripsi detail mengenai Layanan 2. Penjelasan keunggulan teknis serta hasil akhir yang didapatkan oleh calon klien].
+                    </p>
+                </div>
+                <div class="pt-4 brutal-border-t">
+                    <a href="#contact" class="inline-flex items-center gap-2 font-heading font-extrabold text-xs uppercase hover:underline">
+                        Konsultasi Layanan <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="neo-card bg-white p-6 brutal-border shadow-brutal flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="w-14 h-14 bg-neo-green brutal-border flex items-center justify-center text-3xl">
+                        ⚡
+                    </div>
+                    <h3 class="font-heading font-extrabold text-2xl uppercase">[LAYANAN 3]</h3>
+                    <p class="text-xs sm:text-sm font-medium text-gray-700 leading-relaxed">
+                        [Deskripsi detail mengenai Layanan 3. Penjelasan keunggulan teknis serta hasil akhir yang didapatkan oleh calon klien].
+                    </p>
+                </div>
+                <div class="pt-4 brutal-border-t">
+                    <a href="#contact" class="inline-flex items-center gap-2 font-heading font-extrabold text-xs uppercase hover:underline">
+                        Konsultasi Layanan <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="neo-card bg-white p-6 brutal-border shadow-brutal flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="w-14 h-14 bg-neo-purple text-white brutal-border flex items-center justify-center text-3xl">
+                        🛠️
+                    </div>
+                    <h3 class="font-heading font-extrabold text-2xl uppercase">[LAYANAN 4]</h3>
+                    <p class="text-xs sm:text-sm font-medium text-gray-700 leading-relaxed">
+                        [Deskripsi detail mengenai Layanan 4. Penjelasan keunggulan teknis serta hasil akhir yang didapatkan oleh calon klien].
+                    </p>
+                </div>
+                <div class="pt-4 brutal-border-t">
+                    <a href="#contact" class="inline-flex items-center gap-2 font-heading font-extrabold text-xs uppercase hover:underline">
+                        Konsultasi Layanan <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ADVANTAGES / KEUNGGULAN SECTION -->
+    <section id="advantages" class="py-16 bg-neo-cyan/20 brutal-border-y">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
+                <span class="bg-neo-orange text-white px-4 py-1.5 brutal-border shadow-brutal-sm font-heading font-black text-sm uppercase">
+                    03 // WHY CHOOSE US
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">
+                    MENGAPA <span class="bg-neo-yellow px-2 brutal-border">[MEMILIH KAMI]?</span>
+                </h2>
+                <p class="text-base font-medium">
+                    [NILAI UNGGUL DAN KELEBIHAN UTAMA PERUSAHAAN KAMI DIBANDINGKAN KOMPETITOR].
+                </p>
+            </div>
+
+            <!-- Interactive Advantages Tabs / Feature Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Advantage Item 1 -->
+                <div class="bg-white p-6 brutal-border shadow-brutal space-y-3 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-neo-yellow brutal-border flex items-center justify-center font-heading font-black text-xl">
+                        01
+                    </div>
+                    <i class="fa-solid fa-shield-halved text-4xl text-neo-pink"></i>
+                    <h3 class="font-heading font-extrabold text-xl uppercase">[KEUNGGULAN 1]</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        [Penjelasan nilai tambah 1. Contoh: Garansi kualitas, pengerjaan cepat, dan jaminan hasil memuaskan].
+                    </p>
+                </div>
+
+                <!-- Advantage Item 2 -->
+                <div class="bg-white p-6 brutal-border shadow-brutal space-y-3 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-neo-green brutal-border flex items-center justify-center font-heading font-black text-xl">
+                        02
+                    </div>
+                    <i class="fa-solid fa-users text-4xl text-neo-purple"></i>
+                    <h3 class="font-heading font-extrabold text-xl uppercase">[KEUNGGULAN 2]</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        [Penjelasan nilai tambah 2. Contoh: Tim ahli berpengalaman lebih dari 10 tahun di industri spesifik].
+                    </p>
+                </div>
+
+                <!-- Advantage Item 3 -->
+                <div class="bg-white p-6 brutal-border shadow-brutal space-y-3 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-16 h-16 bg-neo-pink text-white brutal-border flex items-center justify-center font-heading font-black text-xl">
+                        03
+                    </div>
+                    <i class="fa-solid fa-headset text-4xl text-neo-cyan"></i>
+                    <h3 class="font-heading font-extrabold text-xl uppercase">[KEUNGGULAN 3]</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        [Penjelasan nilai tambah 3. Contoh: Layanan dukungan pelanggan 24/7 yang responsif dan fleksibel].
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / SHOWCASE PLACEHOLDER -->
+    <section id="portfolio" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+                <span class="bg-neo-pink text-white px-4 py-1.5 brutal-border shadow-brutal-sm font-heading font-black text-sm uppercase">
+                    04 // PORTFOLIO
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight mt-2">
+                    KARYA <span class="bg-neo-cyan px-2 brutal-border">[TERTERBANG]</span>
+                </h2>
+            </div>
+            <p class="font-heading font-extrabold text-sm uppercase bg-neo-yellow px-3 py-1.5 brutal-border">
+                [PROJEK & KLIEN KAMI]
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Project Card 1 -->
+            <div class="neo-card bg-white brutal-border shadow-brutal overflow-hidden">
+                <div class="bg-neo-yellow h-48 brutal-border-b flex items-center justify-center text-4xl font-black">
+                    📁 [PROJEK 1]
+                </div>
+                <div class="p-5 space-y-2">
+                    <span class="bg-neo-black text-white px-2 py-0.5 text-xs font-heading font-bold uppercase">[KATEGORI 1]</span>
+                    <h3 class="font-heading font-extrabold text-lg uppercase">[NAMA PROJEK UTAMA 1]</h3>
+                    <p class="text-xs font-medium text-gray-600">[Deskripsi singkat hasil pencapaian projek 1].</p>
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="neo-card bg-white brutal-border shadow-brutal overflow-hidden">
+                <div class="bg-neo-green h-48 brutal-border-b flex items-center justify-center text-4xl font-black">
+                    🚀 [PROJEK 2]
+                </div>
+                <div class="p-5 space-y-2">
+                    <span class="bg-neo-black text-white px-2 py-0.5 text-xs font-heading font-bold uppercase">[KATEGORI 2]</span>
+                    <h3 class="font-heading font-extrabold text-lg uppercase">[NAMA PROJEK UTAMA 2]</h3>
+                    <p class="text-xs font-medium text-gray-600">[Deskripsi singkat hasil pencapaian projek 2].</p>
+                </div>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="neo-card bg-white brutal-border shadow-brutal overflow-hidden">
+                <div class="bg-neo-purple text-white h-48 brutal-border-b flex items-center justify-center text-4xl font-black">
+                    💥 [PROJEK 3]
+                </div>
+                <div class="p-5 space-y-2">
+                    <span class="bg-neo-black text-white px-2 py-0.5 text-xs font-heading font-bold uppercase">[KATEGORI 3]</span>
+                    <h3 class="font-heading font-extrabold text-lg uppercase">[NAMA PROJEK UTAMA 3]</h3>
+                    <p class="text-xs font-medium text-gray-600">[Deskripsi singkat hasil pencapaian projek 3].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION SECTION -->
+    <section class="py-16 bg-white brutal-border-y">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center space-y-3 mb-10">
+                <span class="bg-neo-yellow px-3 py-1 brutal-border shadow-brutal-sm font-heading font-black text-xs uppercase">
+                    FAQ // PERTANYAAN
+                </span>
+                <h2 class="text-3xl font-extrabold uppercase">PERTANYAAN <span class="bg-neo-green px-2 brutal-border">[SERING DIAJUKAN]</span></h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="brutal-border bg-neo-bg">
+                    <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-heading font-extrabold text-base uppercase flex justify-between items-center">
+                        <span>[FAQ 1: Berapa lama estimasi pengerjaan projek?]</span>
+                        <i class="fa-solid fa-plus text-lg font-black transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 brutal-border-t bg-white text-sm font-medium leading-relaxed">
+                        [Jawaban FAQ 1: Estimasi pengerjaan bervariasi sesuai dengan tingkat kompleksitas layanan yang disepakati].
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="brutal-border bg-neo-bg">
+                    <button onclick="toggleFaq(this)" class="w-full text-left p-4 font-heading font-extrabold text-base uppercase flex justify-between items-center">
+                        <span>[FAQ 2: Bagaimana sistem pembayaran layanan?]</span>
+                        <i class="fa-solid fa-plus text-lg font-black transition-transform"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 brutal-border-t bg-white text-sm font-medium leading-relaxed">
+                        [Jawaban FAQ 2: Pembayaran dapat dilakukan dalam beberapa tahap sesuai kesepakatan kontrak kerja].
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact" class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- Contact Info -->
+            <div class="lg:col-span-5 space-y-6">
+                <span class="bg-neo-pink text-white px-4 py-1.5 brutal-border shadow-brutal-sm font-heading font-black text-sm uppercase">
+                    05 // CONTACT US
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold uppercase tracking-tight">
+                    MARI <span class="bg-neo-yellow px-2 brutal-border">[BERKOLABORASI]</span>
+                </h2>
+                <p class="text-base font-medium text-gray-700 bg-white p-4 brutal-border shadow-brutal-sm">
+                    [Tuliskan kalimat ajakan untuk menghubungi perusahaan Anda. Siap membantu kebutuhan bisnis Anda kapan saja].
+                </p>
+
+                <!-- Info Cards -->
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-4 bg-white p-4 brutal-border shadow-brutal">
+                        <div class="w-12 h-12 bg-neo-cyan brutal-border flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-extrabold text-xs uppercase text-gray-500">Alamat Kantor</h4>
+                            <p class="font-bold text-sm uppercase">[ALAMAT LENGKAP KANTOR PERUSAHAAN]</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white p-4 brutal-border shadow-brutal">
+                        <div class="w-12 h-12 bg-neo-green brutal-border flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-extrabold text-xs uppercase text-gray-500">Email Resmi</h4>
+                            <p class="font-bold text-sm">[EMAIL@PERUSAHAAN.COM]</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white p-4 brutal-border shadow-brutal">
+                        <div class="w-12 h-12 bg-neo-yellow brutal-border flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-extrabold text-xs uppercase text-gray-500">Telepon / WhatsApp</h4>
+                            <p class="font-bold text-sm">[+62 812-XXXX-XXXX]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Form -->
+            <div class="lg:col-span-7">
+                <div class="bg-white p-6 sm:p-10 brutal-border shadow-brutal-xl relative">
+                    <div class="absolute -top-4 -right-4 bg-neo-yellow px-3 py-1 brutal-border font-heading font-black text-xs uppercase">
+                        FAST RESPONSE
+                    </div>
+
+                    <h3 class="font-heading font-black text-2xl uppercase mb-6">KIRIM PESAN LANGSUNG</h3>
+
+                    <form id="company-contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-heading font-extrabold text-xs uppercase mb-1">Nama Lengkap *</label>
+                                <input type="text" required placeholder="[NAMA ANDA]" class="w-full bg-neo-bg p-3 brutal-border text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-neo-pink">
+                            </div>
+                            <div>
+                                <label class="block font-heading font-extrabold text-xs uppercase mb-1">Email Perusahaan *</label>
+                                <input type="email" required placeholder="[EMAIL@PERUSAHAAN.COM]" class="w-full bg-neo-bg p-3 brutal-border text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-neo-pink">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-heading font-extrabold text-xs uppercase mb-1">Nomor Telepon</label>
+                                <input type="tel" placeholder="[NOMOR TELEPON]" class="w-full bg-neo-bg p-3 brutal-border text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-neo-pink">
+                            </div>
+                            <div>
+                                <label class="block font-heading font-extrabold text-xs uppercase mb-1">Pilih Layanan</label>
+                                <select class="w-full bg-neo-bg p-3 brutal-border text-sm font-bold focus:outline-none focus:bg-white">
+                                    <option>[LAYANAN 1]</option>
+                                    <option>[LAYANAN 2]</option>
+                                    <option>[LAYANAN 3]</option>
+                                    <option>[LAINNYA]</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-heading font-extrabold text-xs uppercase mb-1">Pesan / Kebutuhan Projek *</label>
+                            <textarea rows="4" required placeholder="[TULISKAN DETAIL KEBUTUHAN ANDA DI SINI...]" class="w-full bg-neo-bg p-3 brutal-border text-sm font-bold focus:outline-none focus:bg-white focus:ring-2 focus:ring-neo-pink"></textarea>
+                        </div>
+
+                        <button type="submit" class="neo-btn w-full bg-neo-green text-neo-black py-4 brutal-border shadow-brutal font-heading font-black text-lg uppercase tracking-wider">
+                            KIRIM PESAN SEKARANG <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="bg-neo-black text-white brutal-border-t">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pb-8 brutal-border-b border-gray-800">
+                
+                <div class="md:col-span-6 space-y-3">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-neo-yellow text-neo-black font-heading font-black text-lg px-2 py-0.5 brutal-border-sm">
+                            [NAMA PERUSAHAAN]
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-medium max-w-md">
+                        [SLOGAN / DESKRIPSI SINGKAT FOOTER PERUSAHAAN]. Solusi tepat dan tepercaya untuk menunjang pertumbuhan bisnis Anda.
+                    </p>
+                </div>
+
+                <!-- Social Links -->
+                <div class="md:col-span-6 flex flex-wrap md:justify-end gap-3">
+                    <a href="#" class="w-12 h-12 bg-neo-yellow text-neo-black brutal-border flex items-center justify-center text-xl hover:translate-y-[-3px] transition-transform" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-neo-pink text-white brutal-border flex items-center justify-center text-xl hover:translate-y-[-3px] transition-transform" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-neo-cyan text-neo-black brutal-border flex items-center justify-center text-xl hover:translate-y-[-3px] transition-transform" aria-label="Twitter">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-neo-green text-neo-black brutal-border flex items-center justify-center text-xl hover:translate-y-[-3px] transition-transform" aria-label="YouTube">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-heading font-bold uppercase text-gray-400">
+                <p>&copy; 2026 [NAMA PERUSAHAAN]. ALL RIGHTS RESERVED.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline hover:text-neo-yellow">[PRIVACY POLICY]</a>
+                    <a href="#" class="hover:underline hover:text-neo-yellow">[TERMS OF SERVICE]</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Navigation Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Hero Interactive Focus Selector
+        function setFocus(text) {
+            const output = document.getElementById('focus-output');
+            output.innerText = `> Selected: ${text}`;
+            showToast(`Fokus dipilih: ${text}`);
+        }
+
+        // FAQ Accordion Toggle
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            content.classList.toggle('hidden');
+            if(content.classList.contains('hidden')) {
+                icon.classList.remove('rotate-45');
+            } else {
+                icon.classList.add('rotate-45');
+            }
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showToast("Pesan Anda telah berhasil dikirim!");
+            event.target.reset();
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
